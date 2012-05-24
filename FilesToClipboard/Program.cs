@@ -17,13 +17,15 @@ namespace FilesToClipboard
         {
             if (args.Length > 0)
             {
-                String file = args[0];
-                if (File.Exists(file) || Directory.Exists(file))
+                StringCollection paths = new StringCollection();
+                foreach (var file in args)
                 {
-                    StringCollection paths = new StringCollection();
-                    paths.Add(file);
-                    Clipboard.SetFileDropList(paths);
+                    if (File.Exists(file) || Directory.Exists(file))
+                    {                       
+                        paths.Add(file);                       
+                    }
                 }
+                Clipboard.SetFileDropList(paths);
             }
         }
     }
